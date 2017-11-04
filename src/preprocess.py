@@ -12,14 +12,14 @@ def skin_mask(image,kernel_size=3,erode_iter=1,dilate_iter=1,debug=False):
     """
     Performs foreground extraction, typically a hand using simple thresholds in
     YCrCb color space followed by morphological Opening (dilation of erosion).
-    [INPUT]:
+    [PARAMETERS]:
         image (numpy.ndarray)- an RGB image 
         kernel_size (int)- Size of kernel used in filtering and morphology. Should be odd.
         erode_iter (int)- Number of erosion iterations to be performed.
         dilate_iter (int)- Number of dilation iterations to be performed.
         debug (bool)- If set to true then result of each operation is saved in the data folder
                     with filename starting with 'skin_mask'
-    [OUTPUT]:
+    [RETURNS]:
         A binary mask of type np.ndarray
     """
     assert isinstance(image,np.ndarray), "Input not a numpy array"
@@ -44,3 +44,13 @@ def skin_mask(image,kernel_size=3,erode_iter=1,dilate_iter=1,debug=False):
         cv2.imwrite("data/skin_mask_output.jpg",output)
     return output
     
+
+def find_countours(mask):
+    """
+    INCOMPLETE
+    """
+    
+    mask,contours,hierarchy = cv2.findContours(mask)
+    areas = [cv2.moments(x)['m00'] for x in contours]
+    areas = np.argsort(areas)
+    pass

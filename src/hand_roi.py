@@ -7,6 +7,8 @@ Created on Sat Nov 11 12:24:25 2017
 """
 
 import cv2
+import numpy as np
+    cW
 
 def nothing():
     pass
@@ -14,6 +16,9 @@ def nothing():
 def main():
     cv2.namedWindow("Capture Window",cv2.WINDOW_AUTOSIZE)
     cv2.namedWindow("ROI",cv2.WINDOW_AUTOSIZE)
+    cv2.namedWindow("Thresholds",cv2.WINDOW_AUTOSIZE)
+    cv2.createTrackbar("Thresh","Thresholds",0,255,nothing)
+    cv2.createTrackbar("Max Val","Thresholds",0,255,nothing)
     camera = cv2.VideoCapture(0)
     i = 0
     while True:
@@ -30,7 +35,7 @@ def main():
                 break
             if k == ord('c'):
                 ROI = frame[(h-200):(h+200),(w-200):(w+200)]
-                cv2.imwrite("pos/pos-"+str(i)+".jpg",ROI)
+                cv2.imwrite("../data/positiveImages/pos-"+str(i)+".jpg",ROI)
                 print("Image Written")
                 i+=1
                 

@@ -8,15 +8,17 @@ Created on Tue Oct 31 16:56:10 2017
 import numpy as np
 import cv2
 
-def skin_mask(image,kernel_size=3,erode_iter=1,dilate_iter=1,debug=False):
+def skin_mask(image,thresh=(105,130,135,170),kernel_size=3,erode_iter=1,dilate_iter=1,debug=False):
     """
     Performs foreground extraction, typically a hand using simple thresholds in
     YCrCb color space followed by morphological Opening (dilation of erosion).
     [PARAMETERS]:
         image (numpy.ndarray)- an RGB image 
+        thresh (4-tuple int)- 4 integer values giving threshold range of Cb Cr values 
         kernel_size (int)- Size of kernel used in filtering and morphology. Should be odd.
         erode_iter (int)- Number of erosion iterations to be performed.
         dilate_iter (int)- Number of dilation iterations to be performed.
+        
         debug (bool)- If set to true then result of each operation is saved in the data folder
                     with filename starting with 'skin_mask'
     [RETURNS]:
@@ -29,8 +31,8 @@ def skin_mask(image,kernel_size=3,erode_iter=1,dilate_iter=1,debug=False):
     kernel = np.ones((kernel_size,kernel_size),dtype=np.uint8)
     
     image_ycbcr = cv2.cvtColor(image,cv2.COLOR_BGR2YCR_CB)
-    lower = np.array([90,105,130],dtype=np.uint8)
-    upper = np.array([230,135,170],dtype=np.uint8)
+    lower = np.array([90,thresh[0],thresh[1]],dtype=np.uint8)
+    upper = np.array([230,thresh[2],thresh[3]],dtype=np.uint8)
     mask = cv2.inRange(image_ycbcr,lower,upper)
     mask = cv2.medianBlur(mask,kernel_size)
     output = cv2.erode(mask,kernel,iterations=erode_iter)

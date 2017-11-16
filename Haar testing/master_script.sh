@@ -4,7 +4,7 @@ mkdir data info neg pos pos_burned &&
 chmod +x download_neg.sh &&
 ./download_neg.sh &&
 python bg_descriptor.py &&
-python sample_creator.py 128 24 24 &&
+python sample_creator.py 128 24 24 15 &&
 chmod +x sample_creator.sh &&
 ./sample_creator.sh &&
 cd info &&

@@ -45,14 +45,3 @@ def skin_mask(image,thresh=(105,130,135,170),kernel_size=3,erode_iter=1,dilate_i
         cv2.imwrite("data/skin_mask_mask.jpg",mask)
         cv2.imwrite("data/skin_mask_output.jpg",output)
     return output
-    
-
-def find_countours(mask):
-    """
-    INCOMPLETE
-    """
-    
-    mask,contours,hierarchy = cv2.findContours(mask)
-    areas = [cv2.moments(x)['m00'] for x in contours]
-    areas = np.argsort(areas)
-    pass

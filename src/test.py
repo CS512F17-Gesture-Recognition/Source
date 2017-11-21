@@ -52,6 +52,8 @@ def main():
 
     while True:
         ret, frame = cap.read()
+        if frame is None:
+            exit()
         if ret:
             n = cv2.getTrackbarPos("Window Size (x10)","Detection Parameters") *10
             neighbors1 = cv2.getTrackbarPos("Neighbors (Palm)","Detection Parameters")

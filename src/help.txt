@@ -1,0 +1,9 @@
+=======================================
+==================HELP=================
+FOR USE WITH test.py
+Use the this script to test the gesture detector. The Detection Parameters trackbar can be used to tune the various parameters of the detectors:
+“Window Size”: Change minimum detection window size
+“Detector Toggles”: Each gesture detector has a toggle to turn it on or off
+“Neighbors”: Each gesture detector has a bar to set the minimum number of positive features in the neighborhood to be flagged as a positive detection.
+
+At any point of time press the ‘E’ key to exit the program or press ‘H’ to view this help.
